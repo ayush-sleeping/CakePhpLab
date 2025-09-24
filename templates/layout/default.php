@@ -1,55 +1,43 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- * @var \App\View\AppView $this
+ * CakePHP Learning Lab - Default Layout
+ * This layout will be used across all pages in the application.
+ * Contains: Header navigation, common CSS, HTML structure
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
+    <title><?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake']) ?>
-
+    <?= $this->Html->css('style') ?>
+    <meta name="description" content="CakePHP Learning Lab - Learning CakePHP through practical implementation">
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
-        </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/5/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Left side: Project name -->
+            <a href="<?= $this->Url->build('/') ?>" class="logo">
+                CakePHP Lab
+            </a>
+            <!-- Right side: Login/Signup links -->
+            <ul class="nav-links">
+                <li><a href="<?= $this->Url->build('/login') ?>" class="nav-link">Login</a></li>
+                <li><a href="<?= $this->Url->build('/register') ?>" class="btn btn-primary">Sign Up</a></li>
+            </ul>
         </div>
     </nav>
-    <main class="main">
-        <div class="container">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
-        </div>
-    </main>
-    <footer>
-    </footer>
+
+    <!-- Flash Messages -->
+    <?= $this->Flash->render() ?>
+    <!-- Page Content -->
+    <?= $this->fetch('content') ?>
+
 </body>
 </html>
