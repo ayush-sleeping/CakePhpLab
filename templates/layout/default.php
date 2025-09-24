@@ -29,7 +29,7 @@
             <!-- Right side: Login/Signup links -->
             <ul class="nav-links">
                 <li><a href="<?= $this->Url->build('/login') ?>" class="nav-link">Login</a></li>
-                <li><a href="<?= $this->Url->build('/register') ?>" class="btn btn-primary">Sign Up</a></li>
+                <li><a href="<?= $this->Url->build('/signup') ?>" class="btn btn-primary">Sign Up</a></li>
             </ul>
         </div>
     </nav>

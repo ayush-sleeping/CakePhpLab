@@ -156,10 +156,11 @@ CakePhpLab/
 ├── README.md                          # This file
 ├── composer.json                      # PHP dependencies
 ├── config/
+│   ├── Migrations/                  # Database migration files
+│   │   ├── 20230101000000_CreateUsers.php # Migration for Users table
 │   ├── app.php                       # Main application config
 │   ├── app_local.php                 # Local database config
 │   ├── routes.php                    # URL routing definitions
-│   └── bootstrap.php                 # Application bootstrap
 ├── src/
 │   ├── Controller/
 │   │   ├── AppController.php         # Base controller

@@ -226,3 +226,124 @@ body {
         gap: 30px;
     }
 }
+
+
+
+/* Authentication Pages */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.auth-card {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #e0e0e0;
+}
+
+.auth-card h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.auth-card p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: 1px solid #333;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #555;
+    border-color: #555;
+}
+
+.form-actions {
+    margin-top: 30px;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.auth-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: #28a745;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 30px 20px;
+    }
+}
