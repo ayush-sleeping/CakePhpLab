@@ -15,31 +15,6 @@ This project aims to demonstrate:
 - **CRUD Operations**: Full Users management system
 - **CakePHP Conventions**: Understanding MVC pattern, routing, and CakePHP way of doing things
 
-## 🚀 Features
-
-### Authentication System
-
-- User Registration (Signup)
-- User Login with session management
-- Protected Dashboard area
-- Secure Logout functionality
-- Password hashing and validation
-
-### Users CRUD System
-
-- Create new users
-- Read/View user details
-- Update user information
-- Delete users
-- User listing with pagination
-
-### Frontend Features
-
-- Responsive home page
-- Clean navigation system
-- Form validation and error handling
-- Flash messages for user feedback
-
 ## 🛠️ How to Create a New CakePHP Project
 
 If you want to start your own CakePHP project from scratch:
@@ -149,53 +124,75 @@ bin/cake server -p 8765
 - **Signup**: `http://localhost:8765/users/register`
 - **Dashboard**: `http://localhost:8765/dashboard` (after login)
 
-## 📁 Project File Structure
+## 🚀 Features
+
+### Frontend Features
+
+- **Responsive home page** → `templates/Pages/home.php` + `src/Controller/PagesController.php`
+- **Clean navigation system** → `templates/layout/default.php` (main layout template)
+- **Form validation and error handling** → `src/Model/Table/UsersTable.php` (validation rules)
+- **Flash messages for user feedback** → All controllers use `$this->Flash->success/error()`
+- **Clean white/black styling** → `webroot/css/style.css` (simplified CSS)
+
+### Authentication System
+
+- **User Registration (Signup)** → `src/Controller/AuthController.php` + `templates/Auth/signup.php`
+- **User Login with session management** → `src/Controller/AuthController.php` + `templates/Auth/login.php`
+- **Protected Dashboard area** → `src/Controller/DashboardController.php` + `templates/Dashboard/index.php`
+- **Secure Logout functionality** → `src/Controller/AuthController.php` (logout method)
+- **Password hashing and validation** → `src/Model/Entity/User.php` (password_hash & password_verify)
+- **Session-based authentication** → Controllers use `Auth.User` session key
+
+### Users CRUD System
+
+- **Create new users** → `src/Controller/UsersController.php` (add method) + `templates/Users/add.php`
+- **Read/View user details** → `src/Controller/UsersController.php` (view method) + `templates/Users/view.php`
+- **Update user information** → `src/Controller/UsersController.php` (edit method) + `templates/Users/edit.php`
+- **Delete users** → `src/Controller/UsersController.php` (delete method) with POST confirmation
+- **User listing with pagination** → `src/Controller/UsersController.php` (index method) + `templates/Users/index.php`
+- **Database operations** → `src/Model/Table/UsersTable.php` (ORM operations)
+
+## 📁 Essential Project File Structure
 
 ```text
 CakePhpLab/
-├── README.md                          # This file
+├── README.md                          # Project documentation
 ├── composer.json                      # PHP dependencies
 ├── config/
-│   ├── Migrations/                  # Database migration files
-│   │   ├── 20230101000000_CreateUsers.php # Migration for Users table
-│   ├── app.php                       # Main application config
-│   ├── app_local.php                 # Local database config
-│   ├── routes.php                    # URL routing definitions
+│   ├── Migrations/
+│   │   └── 20230101000000_CreateUsers.php # Users table migration
+│   ├── app_local.php                 # Database configuration
+│   └── routes.php                    # URL routing definitions
 ├── src/
 │   ├── Controller/
 │   │   ├── AppController.php         # Base controller
-│   │   ├── PagesController.php       # Static pages (Home)
-│   │   ├── UsersController.php       # User authentication & CRUD
-│   │   └── DashboardController.php   # Protected dashboard
-│   ├── Model/
-│   │   ├── Entity/
-│   │   │   └── User.php              # User entity with validation
-│   │   └── Table/
-│   │       └── UsersTable.php        # User database operations
-│   └── View/
-│       └── Helper/                   # Custom view helpers
+│   │   ├── PagesController.php       # Home page controller
+│   │   ├── AuthController.php        # Signup/Login/Logout controller
+│   │   ├── DashboardController.php   # Protected dashboard controller
+│   │   └── UsersController.php       # Users CRUD operations controller
+│   └── Model/
+│       ├── Entity/
+│       │   └── User.php              # User entity with password hashing
+│       └── Table/
+│           └── UsersTable.php        # User database operations & validation
 ├── templates/
 │   ├── layout/
-│   │   ├── default.php               # Main layout template
-│   │   └── ajax.php                  # AJAX layout
+│   │   └── default.php               # Main layout template
 │   ├── Pages/
-│   │   └── home.php                  # Homepage template
-│   ├── Users/
-│   │   ├── login.php                 # Login form
-│   │   ├── register.php              # Registration form
-│   │   ├── index.php                 # Users listing (CRUD)
-│   │   ├── view.php                  # User details view
-│   │   ├── add.php                   # Add user form
-│   │   └── edit.php                  # Edit user form
-│   └── Dashboard/
-│       └── index.php                 # Dashboard homepage
-├── webroot/
-│   ├── css/                          # Stylesheets
-│   ├── js/                           # JavaScript files
-│   └── img/                          # Images
-├── config/Migrations/                # Database migration files
-├── tests/                            # Unit and integration tests
-└── logs/                             # Application logs
+│   │   └── home.php                  # Frontend homepage
+│   ├── Auth/
+│   │   ├── signup.php                # User registration form
+│   │   └── login.php                 # User login form
+│   ├── Dashboard/
+│   │   └── index.php                 # Dashboard with sidebar navigation
+│   └── Users/
+│       ├── index.php                 # Users listing table
+│       ├── add.php                   # Add new user form
+│       ├── edit.php                  # Edit user form
+│       └── view.php                  # View user details
+└── webroot/
+    └── css/
+        └── style.css                 # Clean white/black styling
 ```
 
 ## 🎓 Learning Objectives
@@ -273,22 +270,9 @@ bin/cake cache clear_all
 bin/cake routes
 ```
 
-## 🤝 Contributing
-
-This is a learning project, but feel free to:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
 ## 📖 Additional Resources
 
 - [CakePHP Official Documentation](https://book.cakephp.org/5/)
 - [CakePHP API Documentation](https://api.cakephp.org/5.0/)
 - [CakePHP Authentication Plugin](https://book.cakephp.org/authentication/2/)
 - [CakePHP Cookbook - Database Access & ORM](https://book.cakephp.org/5/en/orm.html)
-
----
-
-**Happy Learning!** 🎉 This project will help you transition from Laravel to CakePHP by understanding the similarities and differences between these frameworks.
