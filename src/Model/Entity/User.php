@@ -37,4 +37,15 @@ class User extends Entity
         }
         return null;
     }
+
+    /**
+     * Verify a password against the stored hash
+     *
+     * @param string $password The plain text password to verify
+     * @return bool True if password matches, false otherwise
+     */
+    public function verifyPassword(string $password): bool
+    {
+        return password_verify($password, $this->password);
+    }
 }

@@ -26,10 +26,16 @@
             <a href="<?= $this->Url->build('/') ?>" class="logo">
                 CakePHP Lab
             </a>
-            <!-- Right side: Login/Signup links -->
+            <!-- Right side: Login/Signup links or User menu -->
             <ul class="nav-links">
-                <li><a href="<?= $this->Url->build('/login') ?>" class="nav-link">Login</a></li>
-                <li><a href="<?= $this->Url->build('/signup') ?>" class="btn btn-primary">Sign Up</a></li>
+                <?php if ($this->request->getSession()->check('Auth.User')): ?>
+                    <?php $user = $this->request->getSession()->read('Auth.User'); ?>
+                    <li><span class="welcome-text">Welcome, <?= h($user['name']) ?>!</span></li>
+                    <li><a href="<?= $this->Url->build('/logout') ?>" class="nav-link">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="<?= $this->Url->build('/login') ?>" class="nav-link">Login</a></li>
+                    <li><a href="<?= $this->Url->build('/signup') ?>" class="btn btn-primary">Sign Up</a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>

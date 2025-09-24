@@ -57,6 +57,11 @@ body {
     text-decoration: none;
 }
 
+.welcome-text {
+    color: #333;
+    font-weight: 500;
+}
+
 .btn {
     padding: 12px 24px;
     text-decoration: none;
@@ -65,6 +70,10 @@ body {
     background: transparent;
     color: #333;
     display: inline-block;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
 .btn:hover {
@@ -76,11 +85,13 @@ body {
 .btn-primary {
     background: #333;
     color: #fff;
+    border-color: #333;
 }
 
 .btn-primary:hover {
     background: #555;
     color: #fff;
+    border-color: #555;
 }
 
 /* Hero Section */
@@ -291,24 +302,6 @@ body {
     width: 100%;
 }
 
-.btn {
-    padding: 12px 24px;
-    border: 1px solid #333;
-    background: #333;
-    color: white;
-    text-decoration: none;
-    font-weight: normal;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background: #555;
-    border-color: #555;
-}
-
 .form-actions {
     margin-top: 30px;
 }
@@ -346,4 +339,22 @@ body {
     .auth-card {
         padding: 30px 20px;
     }
+}
+
+
+
+/* Additional form styles */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.btn-block {
+    width: 100%;
 }

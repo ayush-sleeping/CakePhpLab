@@ -14,7 +14,7 @@ return function (RouteBuilder $routes): void {
         $builder->connect('/logout', ['controller' => 'Auth', 'action' => 'logout']);
 
         /* Dashboard routes :: */
-        $builder->connect('/dashboard', ['controller' => 'Backend\Dashboard', 'action' => 'dashboard']);
+        $builder->connect('/dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
 
         /* ...and connect the rest of 'Pages' controller's URLs :: */
         $builder->connect('/pages/*', 'Pages::display');

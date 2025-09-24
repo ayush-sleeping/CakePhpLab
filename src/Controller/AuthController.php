@@ -23,17 +23,10 @@ class AuthController extends AppController
             // Attempt to save the user
             if ($usersTable->save($user)) {
                 // Successfully created user
-                $this->Flash->success('Account created successfully! You are now logged in.');
+                $this->Flash->success('Account created successfully! Please login to continue.');
 
-                // Create session for auto-login after signup
-                $this->request->getSession()->write('Auth.User', [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email
-                ]);
-
-                // Redirect to dashboard (we'll create this later)
-                return $this->redirect(['controller' => 'Pages', 'action' => 'display', 'home']);
+                // Redirect to login page
+                return $this->redirect(['action' => 'login']);
             } else {
                 // Validation errors occurred
                 $this->Flash->error('There were some problems with your registration. Please check the form and try again.');
@@ -57,21 +50,46 @@ class AuthController extends AppController
             $email = $this->request->getData('email');
             $password = $this->request->getData('password');
 
-            // TODO: Validate credentials against database
-            // TODO: Create session if valid
-            // TODO: Redirect to dashboard if successful
-            // TODO: Show error message if failed
+            // Basic validation
+            if (empty($email) || empty($password)) {
+                $this->Flash->error('Please enter both email and password.');
+                return;
+            }
 
-            $this->Flash->error('Login functionality not implemented yet.');
+            // Find user by email
+            $usersTable = $this->fetchTable('Users');
+            $user = $usersTable->find()
+                ->where(['email' => $email])
+                ->first();
+
+            // Check if user exists and password is correct
+            if ($user && $user->verifyPassword($password)) {
+                // Login successful - create session
+                $this->Flash->success('Welcome back, ' . h($user->name) . '!');
+
+                // Create user session
+                $this->request->getSession()->write('Auth.User', [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email
+                ]);
+
+                // Redirect to dashboard
+                return $this->redirect(['controller' => 'Dashboard', 'action' => 'index']);
+            } else {
+                // Login failed
+                $this->Flash->error('Invalid email or password. Please try again.');
+            }
         }
     }
 
     public function logout()
     {
-        // TODO: Destroy session
-        // TODO: Redirect to home page
-
-        $this->Flash->success('You have been logged out.');
+        // Destroy user session
+        $this->request->getSession()->delete('Auth.User');
+        // Clear all session data for security
+        $this->request->getSession()->destroy();
+        $this->Flash->success('You have been logged out successfully.');
         return $this->redirect(['controller' => 'Pages', 'action' => 'display', 'home']);
     }
 
