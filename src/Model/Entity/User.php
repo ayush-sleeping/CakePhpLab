@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  */
 class User extends Entity
 {
+    // Fields that can be mass assigned
     protected array $_accessible = [
         'name' => true,
         'email' => true,
@@ -26,10 +27,12 @@ class User extends Entity
         'modified' => true,
     ];
 
+    // Fields hidden from JSON or array output
     protected array $_hidden = [
         'password',
     ];
 
+    // Hash password before saving to database
     protected function _setPassword(string $password): ?string
     {
         if (strlen($password) > 0) {
@@ -39,11 +42,10 @@ class User extends Entity
     }
 
     /**
-     * Verify a password against the stored hash
-     *
-     * @param string $password The plain text password to verify
-     * @return bool True if password matches, false otherwise
-     */
+     * Check if given password matches the stored hash
+     * @param string $password Plain text password
+     * @return bool True if match, false otherwise
+    */
     public function verifyPassword(string $password): bool
     {
         return password_verify($password, $this->password);

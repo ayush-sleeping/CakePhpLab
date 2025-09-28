@@ -8,30 +8,23 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 
+// Handles static pages (like home, about, etc.)
 class PagesController extends AppController
 {
-    /**
-     * Displays a view
-     *
-     * @param string ...$path Path segments.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Http\Exception\ForbiddenException When a directory traversal attempt.
-     * @throws \Cake\View\Exception\MissingTemplateException When the view file could not
-     *   be found and in debug mode.
-     * @throws \Cake\Http\Exception\NotFoundException When the view file could not
-     *   be found and not in debug mode.
-     * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
-     */
+    // Renders a static page based on the URL path
     public function display(string ...$path): ?Response
     {
+        // If no path is given, redirect to home
         if (!$path) {
             return $this->redirect('/');
         }
+        // Prevent directory traversal (security)
         if (in_array('..', $path, true) || in_array('.', $path, true)) {
             throw new ForbiddenException();
         }
-        $page = $subpage = null;
 
+        // Set page and subpage variables for the view
+        $page = $subpage = null;
         if (!empty($path[0])) {
             $page = $path[0];
         }
@@ -40,9 +33,11 @@ class PagesController extends AppController
         }
         $this->set(compact('page', 'subpage'));
 
+        // Try to render the requested template
         try {
             return $this->render(implode('/', $path));
         } catch (MissingTemplateException $exception) {
+            // Show error if template not found
             if (Configure::read('debug')) {
                 throw $exception;
             }

@@ -13,7 +13,7 @@ $this->assign('title', 'Edit User - CakePHP Learning Lab');
         <nav class="sidebar-nav">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="<?= $this->Url->build(['controller' => 'Dashboard', 'action' => 'index']) ?>" class="nav-link">
+                    <a href="<?= $this->Url->build(url: ['controller' => 'Dashboard', 'action' => 'index']) ?>" class="nav-link">
                         Dashboard
                     </a>
                 </li>
